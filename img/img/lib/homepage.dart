@@ -1,8 +1,7 @@
 import 'dart:io';
-
-import 'package:claude_dart_flutter/claude_dart_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:img/api.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,15 +18,15 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _pickImage(ImageSource source) async {
     try {
-      final PickedFile = await _picker.pickImage(
+      final pickedFile = await _picker.pickImage(
         source: source,
         maxHeight: 1080,
         maxWidth: 1920,
         imageQuality: 85,
       );
-      if (PickedFile != null) {
+      if (pickedFile != null) {
         setState(() {
-          _image = File(PickedFile.path);
+          _image = File(pickedFile.path);
         });
         await _analyzeImage();
       }
@@ -44,13 +43,16 @@ class _HomePageState extends State<HomePage> {
     });
 
     try {
-      final description = await ClaudeService().analyzeImage(_image!);
+      final description = await WorkerService().analyzeImage(_image!);
       setState(() {
         _description = description;
-        _isLoading = false;
       });
     } catch (e) {
       print(e);
+      setState(() {
+        _description = "Failed to analyze image";
+      });
+    } finally {
       setState(() {
         _isLoading = false;
       });
@@ -79,7 +81,7 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () => _pickImage(ImageSource.camera),
                 child: Text("Take Photo"),
               ),
-
+              SizedBox(width: 10),
               ElevatedButton(
                 onPressed: () => _pickImage(ImageSource.gallery),
                 child: Text("Pick from Gallery"),
@@ -87,8 +89,16 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           SizedBox(height: 25),
-
-          if (_isLoading) Center(child: CircularProgressIndicator()),
+          if (_isLoading)
+            Center(child: CircularProgressIndicator())
+          else if (_description != null)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                _description!,
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+            ),
         ],
       ),
     );
