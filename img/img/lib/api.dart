@@ -44,5 +44,12 @@ class WorkerService {
     );
 
     // succesful response from Claude
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      return data['content'][0]['text'];
+    }
+
+    // error
+    throw Exception("Failed to analyze image: ${response.statusCode}");
   }
 }
