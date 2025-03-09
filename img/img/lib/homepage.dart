@@ -71,14 +71,24 @@ class _HomePageState extends State<HomePage> {
                     ? Image.file(_image!)
                     : Center(child: Text("Choose image..")),
           ),
+          SizedBox(height: 25),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               ElevatedButton(
                 onPressed: () => _pickImage(ImageSource.camera),
                 child: Text("Take Photo"),
               ),
+
+              ElevatedButton(
+                onPressed: () => _pickImage(ImageSource.gallery),
+                child: Text("Pick from Gallery"),
+              ),
             ],
           ),
+          SizedBox(height: 25),
+
+          if (_isLoading) Center(child: CircularProgressIndicator()),
         ],
       ),
     );
