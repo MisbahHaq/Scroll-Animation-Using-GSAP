@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:claude_dart_flutter/claude_dart_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -64,11 +65,19 @@ class _HomePageState extends State<HomePage> {
         children: [
           Container(
             height: 300,
-            color: Colors.grey,
+            color: Colors.grey.shade300,
             child:
                 _image != null
                     ? Image.file(_image!)
                     : Center(child: Text("Choose image..")),
+          ),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () => _pickImage(ImageSource.camera),
+                child: Text("Take Photo"),
+              ),
+            ],
           ),
         ],
       ),
