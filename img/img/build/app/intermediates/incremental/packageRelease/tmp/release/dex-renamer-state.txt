@@ -1,4 +1,0 @@
-#Sun Mar 09 12:27:07 PKT 2025
-base.0=D\:\\Text to Image\\img\\img\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex
