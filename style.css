@@ -48,6 +48,18 @@ section {
     height: 100svh;
 }
 
+@media (max-width: 1000px) {
+
+    h1,
+    .work-item-name h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.work-item-name h1 {
+    color: #fff;
+}
+
 .work-item-img {
     position: absolute;
     width: 100%;
@@ -63,16 +75,20 @@ section {
     transform: translate(-50%, -50%);
     width: 100%;
     z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-reveal {
+    display: inline-block;
+    overflow: hidden;
+    /* Now using clipPath for the reveal effect */
+    clip-path: inset(100% 0% 0% 0%);
 }
 
 .work-item-name h1 {
+    transform: translateY(0%);
+    /* Reset Y — we use clipPath now */
     color: #fff;
-}
-
-@media (max-width: 1000px) {
-
-    h1,
-    .work-item-name h1 {
-        font-size: 2.5rem;
-    }
 }

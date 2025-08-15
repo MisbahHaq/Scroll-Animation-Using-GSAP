@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger, SplitText);
+    gsap.registerPlugin(ScrollTrigger);
 
     const lenis = new Lenis();
     lenis.on("scroll", ScrollTrigger.update);
@@ -13,32 +13,22 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.ticker.lagSmoothing(0);
 
     gsap.utils.toArray(".work-item").forEach((item) => {
-        const nameH1 = item.querySelector(".work-item-name h1");
-        const img = item.querySelector(".work-item-img"); // ✅ FIXED: Now img is defined
+        const img = item.querySelector(".work-item-img");
+        const textReveal = item.querySelector(".text-reveal");
 
-        // SplitText setup
-        const split = new SplitText(nameH1, {
-            type: "chars",
-            charsClass: "char",
+        // Animate the clip-path of the text container
+        ScrollTrigger.create({
+            trigger: item,
+            start: "top center",
+            end: "top top",
+            scrub: 1,
+            animation: gsap.to(textReveal, {
+                clipPath: "inset(0% 0% 0% 0%)",
+                ease: "power2.out",
+            }),
         });
 
-        gsap.set(split.chars, { y: "125%" });
-
-        split.chars.forEach((char, index) => {
-            ScrollTrigger.create({
-                trigger: item,
-                start: `top+=${index * 25 - 250} top`,
-                end: `top+=${index * 25 - 100} top`,
-                scrub: 1,
-                animation: gsap.fromTo(
-                    char,
-                    { y: "125%" },
-                    { y: "0%", ease: "none" }
-                ),
-            });
-        });
-
-        // Animate image clip path
+        // Animate image entrance
         ScrollTrigger.create({
             trigger: item,
             start: "top bottom",
@@ -56,19 +46,22 @@ document.addEventListener("DOMContentLoaded", () => {
             ),
         });
 
+        // Animate image exit
         ScrollTrigger.create({
             trigger: item,
             start: "bottom bottom",
             end: "bottom top",
             scrub: 0.5,
             animation: gsap.fromTo(
-                img, {
-                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-            }, {
-                clipPath: "polygon(0% 0%, 100% 0%, 75% 60%, 25% 75%)",
-                ease: "none"
-            }
-            )
+                img,
+                {
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                },
+                {
+                    clipPath: "polygon(0% 0%, 100% 0%, 75% 60%, 25% 75%)",
+                    ease: "none",
+                }
+            ),
         });
     });
 });
