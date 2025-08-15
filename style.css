@@ -4,17 +4,13 @@
     box-sizing: border-box;
 }
 
-/* Hide scrollbar for the entire page */
 html {
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
 }
 
 html::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Opera */
 }
 
 body {
@@ -22,14 +18,11 @@ body {
     background-color: #fcfcfc;
     color: #141414;
     scrollbar-width: none;
-    /* Firefox */
     -ms-overflow-style: none;
-    /* Internet Explorer 10+ */
 }
 
 body::-webkit-scrollbar {
     display: none;
-    /* Chrome, Safari, Opera */
 }
 
 img {
