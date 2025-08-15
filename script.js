@@ -14,8 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.utils.toArray(".work-item").forEach((item) => {
         const nameH1 = item.querySelector(".work-item-name h1");
+        const img = item.querySelector(".work-item-img"); // ✅ FIXED: Now img is defined
 
-        // Correct usage of SplitText
+        // SplitText setup
         const split = new SplitText(nameH1, {
             type: "chars",
             charsClass: "char",
@@ -35,6 +36,24 @@ document.addEventListener("DOMContentLoaded", () => {
                     { y: "0%", ease: "none" }
                 ),
             });
+        });
+
+        // Animate image clip path
+        ScrollTrigger.create({
+            trigger: item,
+            start: "top bottom",
+            end: "top top",
+            scrub: 0.5,
+            animation: gsap.fromTo(
+                img,
+                {
+                    clipPath: "polygon(25% 25%, 75% 40%, 100% 100%, 0% 100%)",
+                },
+                {
+                    clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                    ease: "none",
+                }
+            ),
         });
     });
 });
