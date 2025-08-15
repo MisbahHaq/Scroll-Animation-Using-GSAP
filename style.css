@@ -83,12 +83,10 @@ section {
 .text-reveal {
     display: inline-block;
     overflow: hidden;
-    /* Now using clipPath for the reveal effect */
     clip-path: inset(100% 0% 0% 0%);
 }
 
 .work-item-name h1 {
     transform: translateY(0%);
-    /* Reset Y — we use clipPath now */
     color: #fff;
 }

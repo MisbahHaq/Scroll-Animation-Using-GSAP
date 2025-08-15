@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const img = item.querySelector(".work-item-img");
         const textReveal = item.querySelector(".text-reveal");
 
-        // Animate the clip-path of the text container
         ScrollTrigger.create({
             trigger: item,
             start: "top center",
@@ -28,7 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }),
         });
 
-        // Animate image entrance
         ScrollTrigger.create({
             trigger: item,
             start: "top bottom",
@@ -46,7 +44,6 @@ document.addEventListener("DOMContentLoaded", () => {
             ),
         });
 
-        // Animate image exit
         ScrollTrigger.create({
             trigger: item,
             start: "bottom bottom",
