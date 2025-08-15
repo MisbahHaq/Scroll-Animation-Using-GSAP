@@ -5,6 +5,7 @@ This project reveals section headings with a **sunrise-style animation**, while 
 
 ---
 
+https://github.com/user-attachments/assets/f3fc9133-333e-4516-ab28-f8012f560d5f
 
 ---
 
