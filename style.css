@@ -16,6 +16,11 @@ img {
     object-fit: cover;
 }
 
+.char {
+    display: inline-block;
+    will-change: transform;
+}
+
 h1 {
     text-transform: uppercase;
     text-align: center;

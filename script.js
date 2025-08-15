@@ -55,5 +55,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             ),
         });
+
+        ScrollTrigger.create({
+            trigger: item,
+            start: "bottom bottom",
+            end: "bottom top",
+            scrub: 0.5,
+            animation: gsap.fromTo(
+                img, {
+                clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            }, {
+                clipPath: "polygon(0% 0%, 100% 0%, 75% 60%, 25% 75%)",
+                ease: "none"
+            }
+            )
+        });
     });
 });
